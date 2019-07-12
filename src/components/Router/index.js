@@ -15,11 +15,20 @@ class MyRouter extends Component {
             <Router>
                 <Redirect to="/login"/>
 
-                <Route exact path="/login" component={Login}/>
+                {/* <Route exact path="/login" component={Login}/> */}
+                <Route exact path="/login" render={() => this.isUserVerified()}/>
 
                 <Route exact path="/main" render={() => this.isAccessAllowed(Main)}/>
             </Router>
         )
+    }
+
+    isUserVerified = () => {
+        if(this.props.cred.user !== ""){
+            return <Redirect to="/main"/>
+        }else{
+            return <Login/>
+        }
     }
 
     isAccessAllowed = Component => {

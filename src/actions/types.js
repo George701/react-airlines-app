@@ -1,2 +1,3 @@
 export const GET_AUTH = 'GET_AUTH';
 export const GET_CREDENTIALS = 'GET_CREDENTIALS';
+export const GET_UPCOMING_FLIGHTS = 'GET_UPCOMING_FLIGHTS';
