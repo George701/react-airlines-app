@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from "react-redux";
 
 class Main extends Component {
     render() {
@@ -10,4 +11,4 @@ class Main extends Component {
     }
 }
 
-export default Main;
+export default connect((state) => {return {cred: state.cred}})(Main);

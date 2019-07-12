@@ -1,15 +1,13 @@
-import { GET_AUTH } from '../actions/types';
+import { GET_CREDENTIALS } from '../actions/types';
 
 const initialState = {
-    Type: "",
-    Token: "",
-    ExpiresIn: null,
-    EndSession: null
+    user: "",
+    password: "",
 };
 
 export default function(state = initialState, action){
     switch(action.type){
-        case GET_AUTH:
+        case GET_CREDENTIALS:
 
             const result = action.payload;
             

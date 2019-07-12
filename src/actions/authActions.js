@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { GET_AUTH } from './type';
+import { GET_AUTH, GET_CREDENTIALS } from './types';
+import { computeSessionTime } from '../functions';
 
 export const getAuthenticated = (user, pass) => async dispatch => {
 
@@ -15,8 +16,23 @@ export const getAuthenticated = (user, pass) => async dispatch => {
         "Password": pass
       });
 
+    (res.data).EndSession = computeSessionTime(res.data.ExpiresIn);
+    
     dispatch({
         type: GET_AUTH,
         payload: res.data
+    })
+};
+
+export const getCredentials = (user, password) => async dispatch => {
+
+    const res = {
+        user,
+        password
+    }
+
+    dispatch({
+        type: GET_CREDENTIALS,
+        payload: res
     })
 };
