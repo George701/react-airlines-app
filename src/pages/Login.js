@@ -13,12 +13,26 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
+            <div className="container pt-5">
                 <h1>Login</h1>
-                <div>
-                    <input type="text" id="user" onChange={this.onChange} value={this.state.user}/>
-                    <input type="text" id="password" onChange={this.onChange} value={this.state.password}/>
-                    <button onClick={this.login}>Login</button>
+                <div className="form-group">
+                    <label htmlFor="user">
+                        <i className="fas fa-user"/>
+                        <span> User type</span>
+                    </label>
+                    <input type="text" className="form-control" id="user" onChange={this.onChange} value={this.state.user} placeholder="Enter type of user"/>
+                    <small id="emailHelp" className="form-text text-muted">There is two types of user: dev and test</small>
+                    <label htmlFor="password">
+                        <i className="fas fa-key"/>
+                        <span> Password</span>
+                    </label>
+                    <input type="password" className="form-control" id="password" onChange={this.onChange} value={this.state.password}/>
+                    <br/>
+                    <button className="btn btn-primary" onClick={this.login}>
+                        <i className="fas fa-lock-open"/>
+                        <span> Login</span>
+                    </button>
+                    <hr/>
                     {this.alertMessage()}
                 </div>
             </div>
@@ -34,7 +48,9 @@ class Login extends Component {
     alertMessage = () => {
         if(this.state.loginFail === true){
             return (
-                <div>Faild to log in</div>
+                <div className="alert alert-danger" role="alert">
+                    Failed to login
+                </div>
             )
         }else{
             return null

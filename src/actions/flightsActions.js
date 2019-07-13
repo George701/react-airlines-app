@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { GET_UPCOMING_FLIGHTS } from './types';
+import { generateControllerOptions } from '../functions';
 
 export const getUpcomingFlights = (type, token) => async dispatch => {
 
@@ -12,9 +13,11 @@ export const getUpcomingFlights = (type, token) => async dispatch => {
             'Authorization': header
         }
       });
+
+      const result = generateControllerOptions(res.data);
     
     dispatch({
         type: GET_UPCOMING_FLIGHTS,
-        payload: res.data
+        payload: result
     })
 };
