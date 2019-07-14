@@ -48,4 +48,9 @@ MyRouter.propTypes = {
     getAuthenticated: PropTypes.func.isRequired
 }
 
-export default connect((state) => {return {cred: state.cred, auth: state.auth}}, {getAuthenticated})(MyRouter);
+const mapStateToProps = (state) => ({
+    cred: state.cred,
+    auth: state.auth
+ });
+
+export default connect(mapStateToProps, {getAuthenticated})(MyRouter);

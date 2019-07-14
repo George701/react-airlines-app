@@ -4,6 +4,8 @@ import { getUpcomingFlights } from '../actions/flightsActions';
 import { convertDate } from '../functions';
 import PropTypes from "prop-types";
 
+import Rooming from '../components/ContentBlocks/Rooming'
+
 class Main extends Component {
     state = {
         date: "",
@@ -29,7 +31,7 @@ class Main extends Component {
 
     render() {
         const { upcomningFlights } = this.props;
-        console.log(this.state);
+        // console.log(this.state);
         if(Object.keys(upcomningFlights).length !== 0 && this.state.date !== 0){
             return(
                 <div className="container pt-5">
@@ -44,28 +46,30 @@ class Main extends Component {
     }
 
     getBody = () => {
+        const { date, departureAirport, arrivingAirport, airplane} = this.state;
+        // console.log(date, departureAirport, arrivingAirport, airplane);
         return (
             <div className="mt-5">
-                <ul className="nav nav-tabs" id="myTab" role="tablist">
+                <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li className="nav-item">
-                        <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                        <a className="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                        <a className="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                        <a className="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>
                     </li>
                 </ul>
-                <div className="tab-content" id="myTabContent">
-                    <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        Yaw
+                <div className="tab-content" id="pills-tabContent">
+                    <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <Rooming fromDate={date} departureAirport={departureAirport} arrivingAirport={arrivingAirport} pnlName={airplane}/>
                     </div>
-                    <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                         Hi
                     </div>
-                    <div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                        Hello
+                    <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                        HElLo
                     </div>
                 </div>
             </div>
@@ -89,6 +93,7 @@ class Main extends Component {
                         return <option key={d_key} value={unit.Code}>{unit.Name}</option>
                     })}
                 </select>
+                <i className="fas fa-arrow-right arrow-p"/>
                 <select className="form-control col mr-1 ml-1" name="arravingAirport" id="arrivingAirport" onChange={this.onChange} value={arrivingAirport.Code}>
                     {(obj.arAir).map(unit=>{
                         a_key++;
@@ -115,4 +120,10 @@ Main.propTypes = {
     getUpcomingFlights: PropTypes.func.isRequired
 }
 
-export default connect((state) => {return {cred: state.cred, auth: state.auth, upcomningFlights: state.upcomningFlights}}, {getUpcomingFlights})(Main);
+const mapStateToProps = (state) => ({
+    cred: state.cred,
+    auth: state.auth,
+    upcomningFlights: state.upcomningFlights
+ });
+
+export default connect(mapStateToProps, {getUpcomingFlights})(Main);
