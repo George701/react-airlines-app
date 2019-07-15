@@ -4,7 +4,9 @@ import { getUpcomingFlights } from '../actions/flightsActions';
 import { convertDate } from '../functions';
 import PropTypes from "prop-types";
 
-import Rooming from '../components/ContentBlocks/Rooming'
+import Rooming from '../components/ContentBlocks/Rooming';
+import Transfer from '../components/ContentBlocks/Transfer';
+import Passengers from '../components/ContentBlocks/Passengers';
 
 class Main extends Component {
     state = {
@@ -20,7 +22,7 @@ class Main extends Component {
 
     componentWillReceiveProps(props){
         const { upcomningFlights } = props;
-        console.log(upcomningFlights);
+        // console.log(upcomningFlights);
         this.setState({
             date: upcomningFlights.date[0],
             departureAirport: upcomningFlights.dAir[0]["Code"],
@@ -52,24 +54,24 @@ class Main extends Component {
             <div className="mt-5">
                 <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li className="nav-item">
-                        <a className="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+                        <a className="nav-link active" id="pills-rooming-tab" data-toggle="pill" href="#pills-rooming" role="tab" aria-controls="pills-rooming" aria-selected="true">Rooming</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+                        <a className="nav-link" id="pills-transfer-tab" data-toggle="pill" href="#pills-transfer" role="tab" aria-controls="pills-transfer" aria-selected="false">Transfer</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>
+                        <a className="nav-link" id="pills-passenger-tab" data-toggle="pill" href="#pills-passenger" role="tab" aria-controls="pills-passenger" aria-selected="false">Passengers Info</a>
                     </li>
                 </ul>
                 <div className="tab-content" id="pills-tabContent">
-                    <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                    <div className="tab-pane fade show active" id="pills-rooming" role="tabpanel" aria-labelledby="pills-rooming-tab">
                         <Rooming fromDate={date} departureAirport={departureAirport} arrivingAirport={arrivingAirport} pnlName={airplane}/>
                     </div>
-                    <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                        Hi
+                    <div className="tab-pane fade" id="pills-transfer" role="tabpanel" aria-labelledby="pills-transfer-tab">
+                        <Transfer fromDate={date} departureAirport={departureAirport} arrivingAirport={arrivingAirport} pnlName={airplane}/>
                     </div>
-                    <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                        HElLo
+                    <div className="tab-pane fade" id="pills-passenger" role="tabpanel" aria-labelledby="pills-passenger-tab">
+                        <Passengers fromDate={date} departureAirport={departureAirport} arrivingAirport={arrivingAirport} pnlName={airplane}/>
                     </div>
                 </div>
             </div>

@@ -1,48 +1,47 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { getRoomingList } from '../../actions/flightsActions';
+import { getPassengersList } from '../../actions/flightsActions';
 import PropTypes from 'prop-types';
 
-class Rooming extends Component {
+class Passengers extends Component {
 
     componentWillMount(){
         const { auth, fromDate, departureAirport, arrivingAirport, pnlName } = this.props;
-        this.props.getRoomingList(auth.Type, auth.Token, fromDate, departureAirport, arrivingAirport, pnlName);
+        this.props.getPassengersList(auth.Type, auth.Token, fromDate, departureAirport, arrivingAirport, pnlName);
     }
 
     componentDidUpdate(prevProps){
         if(prevProps.fromDate !== this.props.fromDate || prevProps.departureAirport !== this.props.departureAirport || prevProps.arrivingAirport !== this.props.arrivingAirport || prevProps.pnlName !== this.props.pnlName){
-            this.props.getRoomingList(this.props.auth.Type, this.props.auth.Token, this.props.fromDate, this.props.departureAirport, this.props.arrivingAirport, this.props.pnlName);
+            this.props.getPassengersList(this.props.auth.Type, this.props.auth.Token, this.props.fromDate, this.props.departureAirport, this.props.arrivingAirport, this.props.pnlName);
         }
     }
 
-    
-
     render() {
-        const { rooming } = this.props;
-        if(rooming !== undefined || Object.values(rooming) !== 0){
-            if(rooming.Result !== undefined){
-                if((rooming.Result).length !== 0){
+        const { passengers } = this.props;
+        if(passengers !== undefined || Object.values(passengers) !== 0){
+            if(passengers.Result !== undefined){
+                if((passengers.Result).length !== 0){
                     let key = 0;
                     return (
                         <table className="table table-striped">
                             <thead className="thead-dark">
                                 <tr>
-                                    <th scope="col">Hotel</th>
-                                    <th scope="col">Reservation Number</th>
-                                    <th scope="col">Check In</th>
                                     <th scope="col">Name</th>
+                                    <th scope="col">Nationality</th>
+                                    <th scope="col">Flight Number</th>
+                                    <th scope="col">Return Flight Number</th>
                                 </tr>
                             </thead>
                             <tbody className="info-block-overflow">
-                                {(rooming.Result).map(unit => {
+                                {(passengers.Result).map(unit => {
+                                    console.log(unit)
                                     key++;
                                     return (
                                         <tr key={key}>
-                                            <td>{unit.Hotel.Name}</td>
-                                            <td>{unit.ReservationNumber}</td>
-                                            <td>{unit.CheckIn}</td>
                                             <td>{unit.TravellerInfo.Name} {unit.TravellerInfo.Surname}</td>
+                                            <td>{unit.Nation}</td>
+                                            <td>{unit.FlightNo}</td>
+                                            <td>{unit.ReturnFlightNo}</td>
                                         </tr>
                                     )
                                 })}
@@ -61,14 +60,14 @@ class Rooming extends Component {
     }
 }
 
-Rooming.propTypes = {
-    getRoomingList: PropTypes.func.isRequired
+Passengers.propTypes = {
+    getPassengersList: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
-    rooming: state.rooming
+    passengers: state.passengers
  });
 
 
-export default connect(mapStateToProps, { getRoomingList })(Rooming);
+export default connect(mapStateToProps, { getPassengersList })(Passengers);
