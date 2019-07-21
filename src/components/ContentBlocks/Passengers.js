@@ -23,30 +23,32 @@ class Passengers extends Component {
                 if((passengers.Result).length !== 0){
                     let key = 0;
                     return (
-                        <table className="table table-striped">
-                            <thead className="thead-dark">
-                                <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Nationality</th>
-                                    <th scope="col">Flight Number</th>
-                                    <th scope="col">Return Flight Number</th>
-                                </tr>
-                            </thead>
-                            <tbody className="info-block-overflow">
-                                {(passengers.Result).map(unit => {
-                                    console.log(unit)
-                                    key++;
-                                    return (
-                                        <tr key={key}>
-                                            <td>{unit.TravellerInfo.Name} {unit.TravellerInfo.Surname}</td>
-                                            <td>{unit.Nation}</td>
-                                            <td>{unit.FlightNo}</td>
-                                            <td>{unit.ReturnFlightNo}</td>
-                                        </tr>
-                                    )
-                                })}
-                            </tbody>
-                        </table>
+                        <div class="table-responsive-sm">
+                            <table className="table table-striped">
+                                <thead className="thead-dark">
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Nationality</th>
+                                        <th scope="col">Flight Number</th>
+                                        <th scope="col">Return Flight Number</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="info-block-overflow">
+                                    {(passengers.Result).map(unit => {
+                                        console.log(unit)
+                                        key++;
+                                        return (
+                                            <tr key={key}>
+                                                <td>{unit.TravellerInfo.Name} {unit.TravellerInfo.Surname}</td>
+                                                <td>{unit.Nation}</td>
+                                                <td>{unit.FlightNo}</td>
+                                                <td>{unit.ReturnFlightNo}</td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
                     )
                 }else{
                     return <div>There is no results</div>

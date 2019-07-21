@@ -16,8 +16,6 @@ class Rooming extends Component {
         }
     }
 
-    
-
     render() {
         const { rooming } = this.props;
         if(rooming !== undefined || Object.values(rooming) !== 0){

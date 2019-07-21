@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { Redirect } from 'react-router-dom'
+
 import { getUpcomingFlights } from '../actions/flightsActions';
 import { convertDate } from '../functions';
-import PropTypes from "prop-types";
 
 import Rooming from '../components/ContentBlocks/Rooming';
 import Transfer from '../components/ContentBlocks/Transfer';
@@ -22,7 +24,6 @@ class Main extends Component {
 
     componentWillReceiveProps(props){
         const { upcomningFlights } = props;
-        // console.log(upcomningFlights);
         this.setState({
             date: upcomningFlights.date[0],
             departureAirport: upcomningFlights.dAir[0]["Code"],
@@ -33,7 +34,6 @@ class Main extends Component {
 
     render() {
         const { upcomningFlights } = this.props;
-        // console.log(this.state);
         if(Object.keys(upcomningFlights).length !== 0 && this.state.date !== 0){
             return(
                 <div className="container pt-5">
@@ -49,7 +49,6 @@ class Main extends Component {
 
     getBody = () => {
         const { date, departureAirport, arrivingAirport, airplane} = this.state;
-        // console.log(date, departureAirport, arrivingAirport, airplane);
         return (
             <div className="mt-5">
                 <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -113,9 +112,12 @@ class Main extends Component {
     }
 
     onChange = e => {
-        this.setState({[e.target.id]: e.target.value})
+        if(Date.now() > this.props.auth.EndSession){
+            return <Redirect to="/login"/>
+        }else{
+            this.setState({[e.target.id]: e.target.value})
+        }
     }
-
 }
 
 Main.propTypes = {

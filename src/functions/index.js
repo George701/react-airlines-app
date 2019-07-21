@@ -1,5 +1,5 @@
-export const computeSessionTime =  minutes => {
-    const currentTime = Date.now();
+export const computeSessionTime =  (minutes, currentTime = Date.now()) => {
+    // const currentTime = Date.now();
     return new Date(currentTime + minutes*60000).getTime();
 }
 
@@ -74,6 +74,6 @@ const getMonth = month => {
         case "12":
             return "Dec";
         default:
-            return "Unknown"
+            return month
     }
 }

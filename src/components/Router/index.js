@@ -7,7 +7,6 @@ import { getAuthenticated } from '../../actions/authActions';
 
 import Login from '../../pages/Login';
 import Main from '../../pages/Main';
-import Test from '../../pages/Test';
 
 class MyRouter extends Component {
 
@@ -16,7 +15,6 @@ class MyRouter extends Component {
             <Router>
                 <Redirect to="/login"/>
 
-                <Route exact path="/test" component={Test}/>
                 <Route exact path="/login" render={() => this.isUserVerified()}/>
 
                 <Route exact path="/main" render={() => this.isAccessAllowed(Main)}/>

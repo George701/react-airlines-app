@@ -4,7 +4,7 @@ import { getAuthenticated, getCredentials } from '../actions/authActions';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-class Login extends Component {
+export class Login extends Component {
     state = {
         user: "",
         password: "",
@@ -29,8 +29,8 @@ class Login extends Component {
                     <input type="password" className="form-control" id="password" onChange={this.onChange} value={this.state.password}/>
                     <br/>
                     <button className="btn btn-primary" onClick={this.login}>
-                        <i className="fas fa-lock-open"/>
-                        <span> Login</span>
+                        <i className="fas fa-lock-open"/>{" "}
+                        <span>Login</span>
                     </button>
                     <hr/>
                     {this.alertMessage()}
@@ -71,4 +71,8 @@ Login.propTypes = {
     getCredentials: PropTypes.func.isRequired,
 }
 
-export default connect((state) => {return {auth: state.auth}}, {getAuthenticated, getCredentials})(Login);
+const mapStateToProps = (state) => ({
+    auth: state.auth
+ });
+
+export default connect(mapStateToProps, {getAuthenticated, getCredentials})(Login);

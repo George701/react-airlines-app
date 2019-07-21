@@ -2,12 +2,7 @@
     padding: .5rem;
 }
 
-/* thead, tbody, tr{
-    display: block;
-    width: 100%;
-} */
-
 .info-block-overflow{
-    max-height: 60vh;
+    max-height: 50vh;
     overflow-y: auto;
 }
